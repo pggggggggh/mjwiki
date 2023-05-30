@@ -9,8 +9,15 @@ import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AdbIcon from "@mui/icons-material/Adb";
-import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  Autocomplete,
+  Button,
+  ListItemButton,
+  createFilterOptions,
+} from "@mui/material";
+import axios from "axios";
+import { API_URL } from "../config/constants";
 
 const LogoWrapper = styled("div")(({ theme }) => ({
   flexGrow: 1,
@@ -63,31 +70,77 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function Header() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [search, setSearch] = React.useState("");
+  const [docList, setDocList] = React.useState([]);
+  React.useEffect(() => {
+    axios
+      .get(`${API_URL}/alldocs`)
+      .then((result) => {
+        setDocList(result.data);
+      })
+      .catch((error) => {});
+  }, [location]);
+
+  const onChange = (e) => {
+    setSearch(e.target.value);
+  };
+  const filterOptions = createFilterOptions({
+    matchFrom: "start",
+    stringify: (option) => option.title,
+  });
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
           <LogoWrapper>
-            <Link to="/">
+            <a href="/">
               <Box
                 component="img"
                 alt="문정위키"
                 src="/images/logo.png"
                 sx={{ height: 30, mr: 2 }}
               />
-            </Link>
+            </a>
           </LogoWrapper>
 
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="검색"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
-          <Button color="inherit" href="/login">
+          <Box>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <Autocomplete
+                open={search.length >= 1}
+                disableClearable
+                clearOnEscape
+                noOptionsText=""
+                options={docList}
+                onChange={(e, value) => {
+                  navigate(`w/${value.title}`);
+                }}
+                getOptionLabel={(option) => option.title}
+                isOptionEqualToValue={(option, value) => {
+                  return true;
+                }}
+                renderInput={(params) => (
+                  <StyledInputBase
+                    ref={params.InputProps.ref}
+                    inputProps={params.inputProps}
+                    placeholder="검색"
+                    onChange={onChange}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        if (search) navigate(`/w/${search}`);
+                      }
+                    }}
+                  />
+                )}
+              />
+            </Search>
+          </Box>
+
+          <Button color="inherit" onClick={() => navigate("/login/")}>
             로그인
           </Button>
         </Toolbar>

@@ -1,9 +1,11 @@
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { Routes, Route, Link, useNavigate, Navigate } from "react-router-dom";
 import React from "react";
 import HeaderComponent from "./Components/header";
 import DocComponent from "./Components/doc";
 import SideComponent from "./Components/side";
 import EditorComponent from "./Components/editor";
+import HistoryComponent from "./Components/history";
+import ViewComponent from "./Components/view";
 import LoginPage from "./Pages/login";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Container from "@mui/material/Container";
@@ -51,8 +53,48 @@ function App() {
           <Routes>
             <Route exact={true} path={"/login"} element={<LoginPage />} />
             <Route
+              path={"/w/*"}
+              element={
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={8}>
+                    <DocComponent />
+                  </Grid>
+                  <Grid
+                    item
+                    xs={4}
+                    sm={0}
+                    sx={{
+                      display: { xs: "none", sm: "block" },
+                    }}
+                  >
+                    <SideComponent />
+                  </Grid>
+                </Grid>
+              }
+            />
+            <Route
+              path={"/view/:id"}
+              element={
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={8}>
+                    <ViewComponent />
+                  </Grid>
+                  <Grid
+                    item
+                    xs={4}
+                    sm={0}
+                    sx={{
+                      display: { xs: "none", sm: "block" },
+                    }}
+                  >
+                    <SideComponent />
+                  </Grid>
+                </Grid>
+              }
+            />
+            <Route
+              path={"/"}
               exact={true}
-              path={"/w/:title"}
               element={
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={8}>
@@ -73,11 +115,32 @@ function App() {
             />
             <Route
               exact={true}
-              path={"/edit/:title"}
+              path={"/edit/*"}
               element={
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={8}>
                     <EditorComponent />
+                  </Grid>
+                  <Grid
+                    item
+                    xs={4}
+                    sm={0}
+                    sx={{
+                      display: { xs: "none", sm: "block" },
+                    }}
+                  >
+                    <SideComponent />
+                  </Grid>
+                </Grid>
+              }
+            />
+            <Route
+              exact={true}
+              path={"/history/*"}
+              element={
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={8}>
+                    <HistoryComponent />
                   </Grid>
                   <Grid
                     item

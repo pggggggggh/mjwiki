@@ -56,6 +56,11 @@ function loginPage() {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            onClick={() => {
+              alert(
+                "김경탁김경탁김경탁김경탁김경탁김경탁김경탁김경탁김경탁김경탁김경탁김경탁김경탁김경탁"
+              );
+            }}
           >
             로그인
           </Button>

@@ -6,6 +6,16 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import React from "react";
+import { API_URL } from "../config/constants";
+import axios from "axios";
+import dayjs from "dayjs";
+import "dayjs/locale/ko";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { Link, useLocation } from "react-router-dom";
+
+dayjs.extend(relativeTime);
+dayjs.locale("ko");
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -27,17 +37,19 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-function createData(name: string, age: string) {
-  return { name, age };
-}
-const rows = [
-  createData("김경탁/논란", "35 minutes ago"),
-  createData("임지원", "2 hours ago"),
-  createData("박진수", "3 hours ago"),
-  createData("조성민", "yesterday"),
-];
 
-function side() {
+function Side() {
+  const [recents, setRecents] = React.useState([]);
+  const location = useLocation();
+  React.useEffect(() => {
+    axios
+      .get(`${API_URL}/recents`)
+      .then((result) => {
+        setRecents(result.data);
+      })
+      .catch((error) => {});
+  }, [location]);
+
   return (
     <TableContainer
       component={Paper}
@@ -54,12 +66,14 @@ function side() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+          {recents.map((recent) => (
+            <StyledTableRow key={recent.title}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                <Link to={`/w/${recent.title}`}>{recent.title}</Link>
               </StyledTableCell>
-              <StyledTableCell align="right">{row.age}</StyledTableCell>
+              <StyledTableCell align="right">
+                {dayjs(recent.at).fromNow()}
+              </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
@@ -68,4 +82,4 @@ function side() {
   );
 }
 
-export default side;
+export default Side;
