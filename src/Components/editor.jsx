@@ -77,7 +77,7 @@ function Editor() {
 
   return (
     <Box>
-      <Typography variant="h2" gutterBottom>
+      <Typography variant="h3" gutterBottom>
         {title}
       </Typography>
       <CKEditor

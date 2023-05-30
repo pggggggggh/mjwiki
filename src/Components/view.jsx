@@ -45,7 +45,7 @@ function View() {
         <Button onClick={() => navigate(`/w/${title}`)}>돌아가기</Button>
         <Button onClick={() => navigate(`/history/${title}`)}>역사</Button>
       </ButtonGroup>
-      <Typography variant="h2">{`${title} (${id}번 편집본)`}</Typography>
+      <Typography variant="h3">{`${title} (${id}번 편집본)`}</Typography>
       <Divider sx={{ mt: 2, mb: 2 }} />
       <div>{ReactHtmlParser(content)}</div>
     </Paper>

@@ -46,7 +46,7 @@ function Doc() {
         </Button>
         <Button onClick={() => navigate(`/history/${title}`)}>역사</Button>
       </ButtonGroup>
-      <Typography variant="h2">
+      <Typography variant="h3">
         {title + (!content ? " : 없는 문서" : "")}
       </Typography>
       <Divider sx={{ mt: 2, mb: 2 }} />

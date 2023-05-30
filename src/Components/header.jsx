@@ -74,13 +74,16 @@ function Header() {
   const location = useLocation();
   const [search, setSearch] = React.useState("");
   const [docList, setDocList] = React.useState([]);
+  const [key, setKey] = React.useState(0);
   React.useEffect(() => {
+    setSearch("");
     axios
       .get(`${API_URL}/alldocs`)
       .then((result) => {
         setDocList(result.data);
       })
       .catch((error) => {});
+    setKey(key + 1);
   }, [location]);
 
   const onChange = (e) => {
@@ -116,6 +119,7 @@ function Header() {
                 clearOnEscape
                 noOptionsText=""
                 options={docList}
+                key={key}
                 onChange={(e, value) => {
                   navigate(`w/${value.title}`);
                 }}
@@ -125,6 +129,7 @@ function Header() {
                 }}
                 renderInput={(params) => (
                   <StyledInputBase
+                    value={search}
                     ref={params.InputProps.ref}
                     inputProps={params.inputProps}
                     placeholder="검색"
@@ -132,6 +137,7 @@ function Header() {
                     onKeyDown={(e) => {
                       if (e.key === "Enter") {
                         if (search) navigate(`/w/${search}`);
+                        setSearch("");
                       }
                     }}
                   />

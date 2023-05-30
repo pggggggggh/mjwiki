@@ -51,7 +51,7 @@ function History() {
         </Button>
         <Button onClick={() => navigate(`/w/${title}`)}>문서</Button>
       </ButtonGroup>
-      <Typography variant="h2">{title}</Typography>
+      <Typography variant="h3">{title}</Typography>
       <Divider sx={{ mt: 2, mb: 2 }} />
       {history.map((item) => (
         <div align="center">
