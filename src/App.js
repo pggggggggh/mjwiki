@@ -3,13 +3,13 @@ import React from "react";
 import HeaderComponent from "./Components/header";
 import DocComponent from "./Components/doc";
 import SideComponent from "./Components/side";
+import EditorComponent from "./Components/editor";
 import LoginPage from "./Pages/login";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-
 import CssBaseline from "@mui/material/CssBaseline";
 import "./App.css";
 
@@ -52,11 +52,32 @@ function App() {
             <Route exact={true} path={"/login"} element={<LoginPage />} />
             <Route
               exact={true}
-              path={"/"}
+              path={"/w/:title"}
               element={
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={8}>
                     <DocComponent />
+                  </Grid>
+                  <Grid
+                    item
+                    xs={4}
+                    sm={0}
+                    sx={{
+                      display: { xs: "none", sm: "block" },
+                    }}
+                  >
+                    <SideComponent />
+                  </Grid>
+                </Grid>
+              }
+            />
+            <Route
+              exact={true}
+              path={"/edit/:title"}
+              element={
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={8}>
+                    <EditorComponent />
                   </Grid>
                   <Grid
                     item
