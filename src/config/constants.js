@@ -1,1 +1,1 @@
-export const API_URL = "https://mjwiki-server.fly.dev";
+export const API_URL = "https://mjwiki.fly.dev";
