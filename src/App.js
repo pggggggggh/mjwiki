@@ -55,62 +55,92 @@ function App() {
             <Route
               path={"/w/*"}
               element={
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={8}>
-                    <DocComponent />
+                <Box>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={8}>
+                      <DocComponent />
+                    </Grid>
+                    <Grid
+                      item
+                      xs={4}
+                      sm={0}
+                      sx={{
+                        display: { xs: "none", sm: "block" },
+                      }}
+                    >
+                      <SideComponent />
+                    </Grid>
                   </Grid>
-                  <Grid
-                    item
-                    xs={4}
-                    sm={0}
+                  <Box
                     sx={{
-                      display: { xs: "none", sm: "block" },
+                      marginTop: 2,
+                      display: { xs: "block", sm: "none" },
                     }}
                   >
                     <SideComponent />
-                  </Grid>
-                </Grid>
+                  </Box>
+                </Box>
               }
             />
             <Route
               path={"/view/:id"}
               element={
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={8}>
-                    <ViewComponent />
+                <Box>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={8}>
+                      <ViewComponent />
+                    </Grid>
+                    <Grid
+                      item
+                      xs={4}
+                      sm={0}
+                      sx={{
+                        display: { xs: "none", sm: "block" },
+                      }}
+                    >
+                      <SideComponent />
+                    </Grid>
                   </Grid>
-                  <Grid
-                    item
-                    xs={4}
-                    sm={0}
+                  <Box
                     sx={{
-                      display: { xs: "none", sm: "block" },
+                      marginTop: 2,
+                      display: { xs: "block", sm: "none" },
                     }}
                   >
                     <SideComponent />
-                  </Grid>
-                </Grid>
+                  </Box>
+                </Box>
               }
             />
             <Route
               path={"/"}
               exact={true}
               element={
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={8}>
-                    <DocComponent />
+                <Box>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={8}>
+                      <DocComponent />
+                    </Grid>
+                    <Grid
+                      item
+                      xs={4}
+                      sm={0}
+                      sx={{
+                        display: { xs: "none", sm: "block" },
+                      }}
+                    >
+                      <SideComponent />
+                    </Grid>
                   </Grid>
-                  <Grid
-                    item
-                    xs={4}
-                    sm={0}
+                  <Box
                     sx={{
-                      display: { xs: "none", sm: "block" },
+                      marginTop: 2,
+                      display: { xs: "block", sm: "none" },
                     }}
                   >
                     <SideComponent />
-                  </Grid>
-                </Grid>
+                  </Box>
+                </Box>
               }
             />
             <Route
@@ -138,21 +168,31 @@ function App() {
               exact={true}
               path={"/history/*"}
               element={
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={8}>
-                    <HistoryComponent />
+                <Box>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={8}>
+                      <HistoryComponent />
+                    </Grid>
+                    <Grid
+                      item
+                      xs={4}
+                      sm={0}
+                      sx={{
+                        display: { xs: "none", sm: "block" },
+                      }}
+                    >
+                      <SideComponent />
+                    </Grid>
                   </Grid>
-                  <Grid
-                    item
-                    xs={4}
-                    sm={0}
+                  <Box
                     sx={{
-                      display: { xs: "none", sm: "block" },
+                      marginTop: 2,
+                      display: { xs: "block", sm: "none" },
                     }}
                   >
                     <SideComponent />
-                  </Grid>
-                </Grid>
+                  </Box>
+                </Box>
               }
             />
           </Routes>
